@@ -1,62 +1,42 @@
 # Deploy to GitHub Pages
 
-## Step 1 — Create GitHub repository
+Your site: **https://nightpgmr.github.io/sanat/**
 
-1. Go to [github.com/new](https://github.com/new)
-2. Repository name: **`sanat`** (or any name — the URL path will match the repo name)
-3. Set to **Public**
-4. Do **not** add README, .gitignore, or license (we already have them)
-5. Click **Create repository**
+## Fix: site shows README instead of the website?
 
-## Step 2 — Push code
+GitHub Pages is serving the wrong source. Do this once:
 
-Replace `YOUR_USERNAME` with your GitHub username:
+1. Open https://github.com/nightpgmr/sanat/settings/pages
+2. Under **Build and deployment → Source**, choose **Deploy from a branch**
+3. **Branch:** `gh-pages` · **Folder:** `/ (root)`
+4. Click **Save**
+5. Wait 1–2 minutes, then refresh https://nightpgmr.github.io/sanat/
 
-```bash
-cd c:\Users\Faris\Projects\sanat
+After the first push to `main`, GitHub Actions creates the `gh-pages` branch automatically.
 
-git init
-git add .
-git commit -m "Deploy Sanat Food static demo to GitHub Pages"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/sanat.git
-git push -u origin main
-```
+## How it works
 
-## Step 3 — Enable GitHub Pages
+- Push to `main` → GitHub Actions runs `.github/workflows/deploy.yml`
+- Builds Next.js static export from `frontend/`
+- Publishes `frontend/out/` to the `gh-pages` branch
+- GitHub Pages serves that branch at `/sanat/`
 
-1. Open your repo on GitHub
-2. Go to **Settings → Pages**
-3. Under **Build and deployment → Source**, select **GitHub Actions**
-4. Wait 1–2 minutes for the workflow to finish
-5. Open **Actions** tab to watch the deploy job
-
-## Your live URL
-
-```
-https://YOUR_USERNAME.github.io/sanat/
-```
-
-If your repo has a different name, replace `sanat` with that name.
-
-## Manual deploy (optional)
-
-Build locally and push the `out` folder yourself:
+## Manual build (optional)
 
 ```powershell
 cd frontend
 $env:NEXT_PUBLIC_BASE_PATH="/sanat"
-$env:NEXT_PUBLIC_SITE_URL="https://YOUR_USERNAME.github.io/sanat"
+$env:NEXT_PUBLIC_SITE_URL="https://nightpgmr.github.io/sanat"
 npm run build
 ```
 
-The static files will be in `frontend/out/`.
+Output: `frontend/out/`
 
 ## Troubleshooting
 
 | Problem | Fix |
 |---------|-----|
-| 404 on refresh | Ensure `.nojekyll` exists in build output (workflow adds it) |
-| CSS/JS not loading | Repo name in URL must match `NEXT_PUBLIC_BASE_PATH` |
-| Workflow failed | Check **Actions** tab for error logs |
-| Pages not enabled | Settings → Pages → Source = **GitHub Actions** |
+| README shown instead of site | Pages source must be **`gh-pages`** branch, not `main` |
+| 404 / blank page | Check **Actions** tab — workflow must succeed |
+| CSS/JS missing | Repo name must be `sanat` (matches base path) |
+| Workflow failed | Repo **Settings → Actions → General** → allow workflows |

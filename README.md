@@ -36,10 +36,12 @@ npm run build
 ### Deploy to GitHub Pages
 
 1. Push this repo to GitHub
-2. Go to **Settings → Pages → Source**: select **gh-pages** branch
-3. GitHub Actions will auto-deploy on push to `main`
+2. Go to **Settings → Pages → Build and deployment**
+3. Set **Source** to **Deploy from a branch**
+4. Set **Branch** to **`gh-pages`** and folder **`/ (root)`**
+5. Save — GitHub Actions builds and deploys on every push to `main`
 
-Or manually: serve the `frontend/out` folder.
+**Live URL:** [https://nightpgmr.github.io/sanat/](https://nightpgmr.github.io/sanat/)
 
 ---
 
