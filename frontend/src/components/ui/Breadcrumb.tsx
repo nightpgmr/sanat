@@ -10,7 +10,7 @@ export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
     <nav aria-label="مسیر صفحه" className="mb-8">
       <ol className="flex flex-wrap items-center gap-2 text-sm text-muted">
         <li>
-          <Link href="/" className="transition-colors hover:text-gold">
+          <Link href="/" className="transition-colors hover:text-primary">
             خانه
           </Link>
         </li>
@@ -18,7 +18,7 @@ export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
           <li key={i} className="flex items-center gap-2">
             <span aria-hidden="true">/</span>
             {item.href ? (
-              <Link href={item.href} className="transition-colors hover:text-gold">
+              <Link href={item.href} className="transition-colors hover:text-primary">
                 {item.label}
               </Link>
             ) : (

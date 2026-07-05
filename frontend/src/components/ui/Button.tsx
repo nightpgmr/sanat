@@ -10,12 +10,12 @@ interface ButtonProps {
 
 const variants = {
   primary:
-    "bg-gradient-to-l from-gold to-gold-dark text-background shadow-lg shadow-gold/25 hover:shadow-gold/45 hover:brightness-110",
+    "bg-gradient-to-l from-primary-light to-primary text-white shadow-md shadow-primary/25 hover:shadow-primary/40 hover:brightness-110",
   secondary:
-    "bg-surface-elevated text-foreground border border-border hover:border-gold/40 hover:bg-surface",
+    "bg-surface text-foreground border border-border hover:border-primary/30 hover:bg-surface-elevated shadow-sm",
   outline:
-    "border border-gold/40 text-gold hover:bg-gold/10 hover:border-gold/60",
-  ghost: "text-muted hover:text-foreground hover:bg-surface-elevated",
+    "border border-primary/40 text-primary hover:bg-primary/5 hover:border-primary/60",
+  ghost: "text-muted hover:text-primary hover:bg-surface-elevated",
 };
 
 const sizes = {

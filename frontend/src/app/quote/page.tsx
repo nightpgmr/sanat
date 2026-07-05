@@ -131,7 +131,7 @@ export default function QuotePage() {
 
             <button
               type="submit"
-              className="w-full rounded-xl bg-gradient-to-l from-gold to-gold-dark py-3 font-semibold text-background shadow-lg shadow-gold/25 transition-all hover:shadow-gold/40"
+              className="w-full rounded-xl bg-gradient-to-l from-primary-light to-primary py-3 font-semibold text-white shadow-md shadow-primary/25 transition-all hover:shadow-primary/40"
             >
               ارسال درخواست
             </button>

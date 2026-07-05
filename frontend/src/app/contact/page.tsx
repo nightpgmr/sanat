@@ -31,9 +31,9 @@ export default function ContactPage() {
               { label: "واتساپ", value: "پیام در واتساپ", href: siteConfig.social.whatsapp },
             ].map((item) => (
               <div key={item.label} className="rounded-xl border border-border bg-surface p-6">
-                <div className="text-sm font-medium text-gold">{item.label}</div>
+                <div className="text-sm font-medium text-primary">{item.label}</div>
                 {item.href ? (
-                  <a href={item.href} className="mt-1 block text-lg text-foreground hover:text-gold">
+                  <a href={item.href} className="mt-1 block text-lg text-foreground hover:text-primary">
                     {item.value}
                   </a>
                 ) : (
@@ -92,7 +92,7 @@ export default function ContactPage() {
               </div>
               <button
                 type="submit"
-                className="w-full rounded-xl bg-gradient-to-l from-gold to-gold-dark py-3 font-semibold text-background shadow-lg shadow-gold/25 transition-all hover:shadow-gold/40"
+                className="w-full rounded-xl bg-gradient-to-l from-primary-light to-primary py-3 font-semibold text-white shadow-md shadow-primary/25 transition-all hover:shadow-primary/40"
               >
                 ارسال پیام
               </button>
