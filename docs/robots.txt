@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://nightpgmr.github.io/sanat/sanat/sitemap.xml
