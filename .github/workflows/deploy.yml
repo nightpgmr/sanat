@@ -3,6 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main, master]
+    paths:
+      - "frontend/**"
+      - ".github/workflows/deploy.yml"
   workflow_dispatch:
 
 permissions:
@@ -15,9 +18,6 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: frontend
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -29,33 +29,31 @@ jobs:
           cache: npm
           cache-dependency-path: frontend/package-lock.json
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build static site
+      - name: Install and build
+        working-directory: frontend
         env:
           NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
           NEXT_PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
-        run: npm run build
+        run: |
+          npm ci
+          npm run build
+          touch out/.nojekyll
 
-      - name: Add .nojekyll
-        run: touch out/.nojekyll
+      - name: Copy built site to repository root
+        run: |
+          shopt -s dotglob nullglob
+          for item in frontend/out/*; do
+            name="$(basename "$item")"
+            rm -rf "$name"
+            cp -r "$item" "$name"
+          done
+          cp frontend/out/.nojekyll .nojekyll
 
-      # Publish to docs/ on main — GitHub Pages: main branch, /docs folder
-      - name: Deploy to docs folder
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./frontend/out
-          publish_branch: main
-          destination_dir: docs
-          keep_files: true
-
-      # Also publish to gh-pages branch (alternative Pages source)
-      - name: Deploy to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./frontend/out
-          publish_branch: gh-pages
-          force_orphan: true
+      - name: Commit and push site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --staged --quiet && echo "No changes" && exit 0
+          git commit -m "deploy: update GitHub Pages site [skip ci]"
+          git push

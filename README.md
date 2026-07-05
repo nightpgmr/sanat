@@ -35,11 +35,11 @@ npm run build
 
 ### Deploy to GitHub Pages
 
-1. Push this repo to GitHub
-2. Go to **Settings → Pages → Build and deployment**
-3. Set **Source** to **Deploy from a branch**
-4. Set **Branch** to **`main`** and folder **`/docs`**
-5. Save — site goes live at https://nightpgmr.github.io/sanat/
+The built site is published to the **repository root** (`index.html`, `_next/`, etc.).
+
+1. Push to `main` — GitHub Actions rebuilds automatically
+2. **Settings → Pages → Source:** `main` branch, **`/ (root)`** folder
+3. Live at **https://nightpgmr.github.io/sanat/**
 
 ---
 
@@ -49,7 +49,8 @@ npm run build
 sanat/
 ├── frontend/          # Next.js static demo (Persian RTL)
 ├── documentation/     # Architecture & strategy docs
-├── docs/              # Built static site (GitHub Pages)
+├── index.html           # Built site (GitHub Pages)
+├── _next/               # Built assets (GitHub Pages)
 ├── backend/           # (Phase 2) Django + DRF API
 ├── .github/workflows/ # CI/CD for GitHub Pages
 └── README.md

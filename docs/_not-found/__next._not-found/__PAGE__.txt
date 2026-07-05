@@ -1,6 +1,0 @@
-1:"$Sreact.fragment"
-2:I[22016,["/sanat/_next/static/chunks/3rdqn8rx95pw7.js","/sanat/_next/static/chunks/14mrh2-p_w84d.js"],""]
-3:I[97367,["/sanat/_next/static/chunks/3rdqn8rx95pw7.js","/sanat/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
-4:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex min-h-[60vh] flex-col items-center justify-center px-4 py-20 text-center","children":[["$","h1",null,{"className":"text-6xl font-bold text-primary","children":"۴۰۴"}],["$","p",null,{"className":"mt-4 text-xl text-muted","children":"صفحه مورد نظر یافت نشد"}],["$","$L2",null,{"href":"/","className":"inline-flex items-center justify-center rounded-2xl font-semibold transition-all duration-300 bg-gradient-to-l from-primary-light to-primary text-white shadow-md shadow-primary/25 hover:shadow-primary/40 hover:brightness-110 px-6 py-3 text-sm gap-2 mt-8","children":"بازگشت به خانه"}]]}],null,["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"g4S9p5pOngpR2Tfxo1LMU"}
-5:null
