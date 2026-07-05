@@ -39,9 +39,17 @@ jobs:
           npm run build
           touch out/.nojekyll
 
-      - name: Copy built site to repository root
+      - name: Deploy to docs/, root, and gh-pages
         run: |
           shopt -s dotglob nullglob
+
+          # docs/ folder (Pages: main /docs)
+          rm -rf docs
+          mkdir -p docs
+          cp -r frontend/out/* docs/
+          cp frontend/out/.nojekyll docs/
+
+          # repo root (Pages: main /root)
           for item in frontend/out/*; do
             name="$(basename "$item")"
             rm -rf "$name"
@@ -49,11 +57,17 @@ jobs:
           done
           cp frontend/out/.nojekyll .nojekyll
 
-      - name: Commit and push site
+      - name: Commit to main
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          git diff --staged --quiet && echo "No changes" && exit 0
-          git commit -m "deploy: update GitHub Pages site [skip ci]"
-          git push
+          git diff --staged --quiet && echo "No changes on main" || (git commit -m "deploy: update site files [skip ci]" && git push)
+
+      - name: Deploy gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./frontend/out
+          publish_branch: gh-pages
+          force_orphan: true
